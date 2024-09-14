@@ -1,0 +1,1259 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Pharmacy2Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Categories">
+          <Key>
+            <PropertyRef Name="CategoryID" />
+          </Key>
+          <Property Name="CategoryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Category_Name" Type="nvarchar" MaxLength="100" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="Customers_Returns">
+          <Key>
+            <PropertyRef Name="Cust_Return_ID" />
+          </Key>
+          <Property Name="Cust_Return_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Total_Price" Type="float" />
+          <Property Name="Total_amount" Type="int" />
+          <Property Name="return_Date" Type="date" />
+          <Property Name="c_Return_Code" Type="int" />
+          <Property Name="Customer_Name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Customers_Returns_Orders">
+          <Key>
+            <PropertyRef Name="CRO_ID" />
+          </Key>
+          <Property Name="CRO_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Order_ID" Type="int" />
+          <Property Name="Cust_Return_ID" Type="int" />
+          <Property Name="Employee_Id" Type="int" />
+          <Property Name="Product_ID" Type="int" />
+        </EntityType>
+        <EntityType Name="Employees">
+          <Key>
+            <PropertyRef Name="Employee_ID" />
+          </Key>
+          <Property Name="Employee_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Employee_Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="National_ID" Type="nvarchar" MaxLength="14" />
+          <Property Name="Gender" Type="nvarchar" MaxLength="10" />
+          <Property Name="Employee_Address" Type="nvarchar" MaxLength="50" />
+          <Property Name="Employee_Phone" Type="nvarchar" MaxLength="11" />
+          <Property Name="Employee_Email" Type="nvarchar" MaxLength="40" />
+          <Property Name="Salary" Type="float" />
+          <Property Name="Position" Type="nvarchar" MaxLength="20" />
+          <Property Name="Hire_Date" Type="date" />
+          <Property Name="Employee_Shift" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="ExpiringMedicines">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MedicineId" Type="int" />
+          <Property Name="MedicineName" Type="nvarchar" MaxLength="100" />
+          <Property Name="ExpirationDate" Type="date" />
+        </EntityType>
+        <EntityType Name="low_stock">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MedicineId" Type="int" />
+          <Property Name="MedicineName" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Orders">
+          <Key>
+            <PropertyRef Name="Order_ID" />
+          </Key>
+          <Property Name="Order_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Total_Amount" Type="int" />
+          <Property Name="Total_price" Type="float" />
+          <Property Name="Order_Code" Type="nvarchar" MaxLength="20" />
+          <Property Name="Sell_date" Type="date" />
+          <Property Name="Customer_Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Customer_Phone" Type="nvarchar" MaxLength="11" />
+          <Property Name="Employee_ID" Type="int" />
+        </EntityType>
+        <EntityType Name="Pharmacy_Useres">
+          <Key>
+            <PropertyRef Name="use_ID" />
+          </Key>
+          <Property Name="use_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Employee_Email" Type="nvarchar" MaxLength="40" />
+          <Property Name="passwords" Type="nvarchar" MaxLength="11" />
+          <Property Name="Role" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Products">
+          <Key>
+            <PropertyRef Name="Product_ID" />
+          </Key>
+          <Property Name="Product_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Product_Name" Type="nvarchar" MaxLength="100" />
+          <Property Name="Category_ID" Type="int" />
+          <Property Name="Total_Quantity" Type="int" />
+          <Property Name="Unit" Type="int" />
+          <Property Name="Price_Per_Unit" Type="float" />
+          <Property Name="Price" Type="float" />
+        </EntityType>
+        <EntityType Name="Products_Orders">
+          <Key>
+            <PropertyRef Name="Product_Order_ID" />
+          </Key>
+          <Property Name="Product_Order_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Product_ID" Type="int" />
+          <Property Name="Order_ID" Type="int" />
+          <Property Name="Quantity" Type="int" />
+        </EntityType>
+        <EntityType Name="Quantity_Details">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Product_ID" Type="int" />
+          <Property Name="Expiration_Date" Type="date" />
+          <Property Name="Quantity" Type="int" />
+        </EntityType>
+        <EntityType Name="Return_Supplier_Invoices">
+          <Key>
+            <PropertyRef Name="Return_Supplier_ID" />
+          </Key>
+          <Property Name="Return_Supplier_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Return_Supplier_Date" Type="date" />
+          <Property Name="Return_Price" Type="float" />
+          <Property Name="Return_Total_Amount" Type="int" />
+          <Property Name="Employee_ID" Type="int" />
+          <Property Name="Supplier_Note" Type="nvarchar(max)" />
+          <Property Name="RS_Code" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="Return_Supplier_Invoices_Products">
+          <Key>
+            <PropertyRef Name="RSP_ID" />
+          </Key>
+          <Property Name="RSP_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Return_Supplier_ID" Type="int" />
+          <Property Name="Supplier_Invoices_ID" Type="int" />
+          <Property Name="Supplier_ID" Type="int" />
+          <Property Name="Product_ID" Type="int" />
+        </EntityType>
+        <EntityType Name="Supplier_Invoices">
+          <Key>
+            <PropertyRef Name="Supplier_Invoices_ID" />
+          </Key>
+          <Property Name="Supplier_Invoices_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="S_Invoice_TotalAmount" Type="float" />
+          <Property Name="S_Invoice_Date" Type="date" />
+          <Property Name="S_Invoice_code" Type="int" />
+          <Property Name="Suppliers_ID" Type="int" />
+          <Property Name="Employee_ID" Type="int" />
+        </EntityType>
+        <EntityType Name="Supplier_Invoices_Products">
+          <Key>
+            <PropertyRef Name="Supplier_ID" />
+            <PropertyRef Name="Product_ID" />
+            <PropertyRef Name="Supplier_Invoices_ID" />
+          </Key>
+          <Property Name="Supplier_ID" Type="int" Nullable="false" />
+          <Property Name="Product_ID" Type="int" Nullable="false" />
+          <Property Name="Supplier_Invoices_ID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Suppliers">
+          <Key>
+            <PropertyRef Name="Supplier_ID" />
+          </Key>
+          <Property Name="Supplier_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Supplier_Name" Type="nvarchar" MaxLength="80" />
+          <Property Name="Supplier_Phone" Type="nvarchar" MaxLength="11" />
+          <Property Name="Supplier_Email" Type="nvarchar" MaxLength="40" />
+          <Property Name="Supplier_Address" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_CustomerReturnOrder_CustomerReturn">
+          <End Role="Customers_Returns" Type="Self.Customers_Returns" Multiplicity="0..1" />
+          <End Role="Customers_Returns_Orders" Type="Self.Customers_Returns_Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers_Returns">
+              <PropertyRef Name="Cust_Return_ID" />
+            </Principal>
+            <Dependent Role="Customers_Returns_Orders">
+              <PropertyRef Name="Cust_Return_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_CustomerReturnOrder_Employees">
+          <End Role="Employees" Type="Self.Employees" Multiplicity="0..1" />
+          <End Role="Customers_Returns_Orders" Type="Self.Customers_Returns_Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="Employee_ID" />
+            </Principal>
+            <Dependent Role="Customers_Returns_Orders">
+              <PropertyRef Name="Employee_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CustomerReturnOrder_Orders">
+          <End Role="Orders" Type="Self.Orders" Multiplicity="0..1" />
+          <End Role="Customers_Returns_Orders" Type="Self.Customers_Returns_Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="Order_ID" />
+            </Principal>
+            <Dependent Role="Customers_Returns_Orders">
+              <PropertyRef Name="Order_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CustomerReturnOrder_Products">
+          <End Role="Products" Type="Self.Products" Multiplicity="0..1" />
+          <End Role="Customers_Returns_Orders" Type="Self.Customers_Returns_Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="Product_ID" />
+            </Principal>
+            <Dependent Role="Customers_Returns_Orders">
+              <PropertyRef Name="Product_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Orders_Employees">
+          <End Role="Employees" Type="Self.Employees" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="Employee_ID" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="Employee_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PK_SupplierInvoicesProduct_Products">
+          <End Role="Products" Type="Self.Products" Multiplicity="1" />
+          <End Role="Supplier_Invoices_Products" Type="Self.Supplier_Invoices_Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="Product_ID" />
+            </Principal>
+            <Dependent Role="Supplier_Invoices_Products">
+              <PropertyRef Name="Product_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PK_SupplierInvoicesProduct_SupplierInvoices">
+          <End Role="Supplier_Invoices" Type="Self.Supplier_Invoices" Multiplicity="1" />
+          <End Role="Supplier_Invoices_Products" Type="Self.Supplier_Invoices_Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Supplier_Invoices">
+              <PropertyRef Name="Supplier_Invoices_ID" />
+            </Principal>
+            <Dependent Role="Supplier_Invoices_Products">
+              <PropertyRef Name="Supplier_Invoices_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PK_SupplierInvoicesProduct_Suppliers">
+          <End Role="Suppliers" Type="Self.Suppliers" Multiplicity="1" />
+          <End Role="Supplier_Invoices_Products" Type="Self.Supplier_Invoices_Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Suppliers">
+              <PropertyRef Name="Supplier_ID" />
+            </Principal>
+            <Dependent Role="Supplier_Invoices_Products">
+              <PropertyRef Name="Supplier_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_product_category">
+          <End Role="Categories" Type="Self.Categories" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Products" Type="Self.Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categories">
+              <PropertyRef Name="CategoryID" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="Category_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductOrders_Orders">
+          <End Role="Orders" Type="Self.Orders" Multiplicity="0..1" />
+          <End Role="Products_Orders" Type="Self.Products_Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="Order_ID" />
+            </Principal>
+            <Dependent Role="Products_Orders">
+              <PropertyRef Name="Order_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductOrders_Products">
+          <End Role="Products" Type="Self.Products" Multiplicity="0..1" />
+          <End Role="Products_Orders" Type="Self.Products_Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="Product_ID" />
+            </Principal>
+            <Dependent Role="Products_Orders">
+              <PropertyRef Name="Product_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Quantity_Details_product">
+          <End Role="Products" Type="Self.Products" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Quantity_Details" Type="Self.Quantity_Details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="Product_ID" />
+            </Principal>
+            <Dependent Role="Quantity_Details">
+              <PropertyRef Name="Product_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_ReturnSupplierInvoices_Employees">
+          <End Role="Employees" Type="Self.Employees" Multiplicity="0..1" />
+          <End Role="Return_Supplier_Invoices" Type="Self.Return_Supplier_Invoices" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="Employee_ID" />
+            </Principal>
+            <Dependent Role="Return_Supplier_Invoices">
+              <PropertyRef Name="Employee_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReturnSupplierInvoices_Products">
+          <End Role="Products" Type="Self.Products" Multiplicity="0..1" />
+          <End Role="Return_Supplier_Invoices_Products" Type="Self.Return_Supplier_Invoices_Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="Product_ID" />
+            </Principal>
+            <Dependent Role="Return_Supplier_Invoices_Products">
+              <PropertyRef Name="Product_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReturnSupplierInvoices_Return_Supplier">
+          <End Role="Return_Supplier_Invoices" Type="Self.Return_Supplier_Invoices" Multiplicity="0..1" />
+          <End Role="Return_Supplier_Invoices_Products" Type="Self.Return_Supplier_Invoices_Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Return_Supplier_Invoices">
+              <PropertyRef Name="Return_Supplier_ID" />
+            </Principal>
+            <Dependent Role="Return_Supplier_Invoices_Products">
+              <PropertyRef Name="Return_Supplier_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReturnSupplierInvoices_Supplier">
+          <End Role="Suppliers" Type="Self.Suppliers" Multiplicity="0..1" />
+          <End Role="Return_Supplier_Invoices_Products" Type="Self.Return_Supplier_Invoices_Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Suppliers">
+              <PropertyRef Name="Supplier_ID" />
+            </Principal>
+            <Dependent Role="Return_Supplier_Invoices_Products">
+              <PropertyRef Name="Supplier_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReturnSupplierInvoices_SupplierInvoices">
+          <End Role="Supplier_Invoices" Type="Self.Supplier_Invoices" Multiplicity="0..1" />
+          <End Role="Return_Supplier_Invoices_Products" Type="Self.Return_Supplier_Invoices_Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Supplier_Invoices">
+              <PropertyRef Name="Supplier_Invoices_ID" />
+            </Principal>
+            <Dependent Role="Return_Supplier_Invoices_Products">
+              <PropertyRef Name="Supplier_Invoices_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_SupplierInvoices_Employees">
+          <End Role="Employees" Type="Self.Employees" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Supplier_Invoices" Type="Self.Supplier_Invoices" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="Employee_ID" />
+            </Principal>
+            <Dependent Role="Supplier_Invoices">
+              <PropertyRef Name="Employee_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_SupplierInvoices_Suppliers">
+          <End Role="Suppliers" Type="Self.Suppliers" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Supplier_Invoices" Type="Self.Supplier_Invoices" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Suppliers">
+              <PropertyRef Name="Supplier_ID" />
+            </Principal>
+            <Dependent Role="Supplier_Invoices">
+              <PropertyRef Name="Suppliers_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Pharmacy2ModelStoreContainer">
+          <EntitySet Name="Categories" EntityType="Self.Categories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customers_Returns" EntityType="Self.Customers_Returns" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customers_Returns_Orders" EntityType="Self.Customers_Returns_Orders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employees" EntityType="Self.Employees" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ExpiringMedicines" EntityType="Self.ExpiringMedicines" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="low_stock" EntityType="Self.low_stock" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Pharmacy_Useres" EntityType="Self.Pharmacy_Useres" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Products_Orders" EntityType="Self.Products_Orders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Quantity_Details" EntityType="Self.Quantity_Details" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Return_Supplier_Invoices" EntityType="Self.Return_Supplier_Invoices" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Return_Supplier_Invoices_Products" EntityType="Self.Return_Supplier_Invoices_Products" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Supplier_Invoices" EntityType="Self.Supplier_Invoices" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Supplier_Invoices_Products" EntityType="Self.Supplier_Invoices_Products" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Suppliers" EntityType="Self.Suppliers" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_CustomerReturnOrder_CustomerReturn" Association="Self.FK_CustomerReturnOrder_CustomerReturn">
+            <End Role="Customers_Returns" EntitySet="Customers_Returns" />
+            <End Role="Customers_Returns_Orders" EntitySet="Customers_Returns_Orders" />
+          </AssociationSet>
+          <AssociationSet Name="fk_CustomerReturnOrder_Employees" Association="Self.fk_CustomerReturnOrder_Employees">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="Customers_Returns_Orders" EntitySet="Customers_Returns_Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CustomerReturnOrder_Orders" Association="Self.FK_CustomerReturnOrder_Orders">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="Customers_Returns_Orders" EntitySet="Customers_Returns_Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CustomerReturnOrder_Products" Association="Self.FK_CustomerReturnOrder_Products">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Customers_Returns_Orders" EntitySet="Customers_Returns_Orders" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Orders_Employees" Association="Self.fk_Orders_Employees">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PK_SupplierInvoicesProduct_Products" Association="Self.FK_PK_SupplierInvoicesProduct_Products">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Supplier_Invoices_Products" EntitySet="Supplier_Invoices_Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PK_SupplierInvoicesProduct_SupplierInvoices" Association="Self.FK_PK_SupplierInvoicesProduct_SupplierInvoices">
+            <End Role="Supplier_Invoices" EntitySet="Supplier_Invoices" />
+            <End Role="Supplier_Invoices_Products" EntitySet="Supplier_Invoices_Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PK_SupplierInvoicesProduct_Suppliers" Association="Self.FK_PK_SupplierInvoicesProduct_Suppliers">
+            <End Role="Suppliers" EntitySet="Suppliers" />
+            <End Role="Supplier_Invoices_Products" EntitySet="Supplier_Invoices_Products" />
+          </AssociationSet>
+          <AssociationSet Name="fk_product_category" Association="Self.fk_product_category">
+            <End Role="Categories" EntitySet="Categories" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductOrders_Orders" Association="Self.FK_ProductOrders_Orders">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="Products_Orders" EntitySet="Products_Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductOrders_Products" Association="Self.FK_ProductOrders_Products">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Products_Orders" EntitySet="Products_Orders" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Quantity_Details_product" Association="Self.fk_Quantity_Details_product">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Quantity_Details" EntitySet="Quantity_Details" />
+          </AssociationSet>
+          <AssociationSet Name="fk_ReturnSupplierInvoices_Employees" Association="Self.fk_ReturnSupplierInvoices_Employees">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="Return_Supplier_Invoices" EntitySet="Return_Supplier_Invoices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReturnSupplierInvoices_Products" Association="Self.FK_ReturnSupplierInvoices_Products">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Return_Supplier_Invoices_Products" EntitySet="Return_Supplier_Invoices_Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReturnSupplierInvoices_Return_Supplier" Association="Self.FK_ReturnSupplierInvoices_Return_Supplier">
+            <End Role="Return_Supplier_Invoices" EntitySet="Return_Supplier_Invoices" />
+            <End Role="Return_Supplier_Invoices_Products" EntitySet="Return_Supplier_Invoices_Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReturnSupplierInvoices_Supplier" Association="Self.FK_ReturnSupplierInvoices_Supplier">
+            <End Role="Suppliers" EntitySet="Suppliers" />
+            <End Role="Return_Supplier_Invoices_Products" EntitySet="Return_Supplier_Invoices_Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReturnSupplierInvoices_SupplierInvoices" Association="Self.FK_ReturnSupplierInvoices_SupplierInvoices">
+            <End Role="Supplier_Invoices" EntitySet="Supplier_Invoices" />
+            <End Role="Return_Supplier_Invoices_Products" EntitySet="Return_Supplier_Invoices_Products" />
+          </AssociationSet>
+          <AssociationSet Name="fk_SupplierInvoices_Employees" Association="Self.fk_SupplierInvoices_Employees">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="Supplier_Invoices" EntitySet="Supplier_Invoices" />
+          </AssociationSet>
+          <AssociationSet Name="fk_SupplierInvoices_Suppliers" Association="Self.fk_SupplierInvoices_Suppliers">
+            <End Role="Suppliers" EntitySet="Suppliers" />
+            <End Role="Supplier_Invoices" EntitySet="Supplier_Invoices" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Pharmacy2Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="CategoryID" />
+          </Key>
+          <Property Name="CategoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Category_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Products" Relationship="Self.fk_product_category" FromRole="Categories" ToRole="Products" />
+        </EntityType>
+        <EntityType Name="Customers_Returns">
+          <Key>
+            <PropertyRef Name="Cust_Return_ID" />
+          </Key>
+          <Property Name="Cust_Return_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Total_Price" Type="Double" />
+          <Property Name="Total_amount" Type="Int32" />
+          <Property Name="return_Date" Type="DateTime" Precision="0" />
+          <Property Name="c_Return_Code" Type="Int32" />
+          <Property Name="Customer_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Customers_Returns_Orders" Relationship="Self.FK_CustomerReturnOrder_CustomerReturn" FromRole="Customers_Returns" ToRole="Customers_Returns_Orders" />
+        </EntityType>
+        <EntityType Name="Customers_Returns_Orders">
+          <Key>
+            <PropertyRef Name="CRO_ID" />
+          </Key>
+          <Property Name="CRO_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Order_ID" Type="Int32" />
+          <Property Name="Cust_Return_ID" Type="Int32" />
+          <Property Name="Employee_Id" Type="Int32" />
+          <Property Name="Product_ID" Type="Int32" />
+          <NavigationProperty Name="Customers_Returns" Relationship="Self.FK_CustomerReturnOrder_CustomerReturn" FromRole="Customers_Returns_Orders" ToRole="Customers_Returns" />
+          <NavigationProperty Name="Employee" Relationship="Self.fk_CustomerReturnOrder_Employees" FromRole="Customers_Returns_Orders" ToRole="Employees" />
+          <NavigationProperty Name="Order" Relationship="Self.FK_CustomerReturnOrder_Orders" FromRole="Customers_Returns_Orders" ToRole="Orders" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_CustomerReturnOrder_Products" FromRole="Customers_Returns_Orders" ToRole="Products" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="Employee_ID" />
+          </Key>
+          <Property Name="Employee_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Employee_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="National_ID" Type="String" MaxLength="14" FixedLength="false" Unicode="true" />
+          <Property Name="Gender" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Employee_Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Employee_Phone" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
+          <Property Name="Employee_Email" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="Salary" Type="Double" />
+          <Property Name="Position" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Hire_Date" Type="DateTime" Precision="0" />
+          <Property Name="Employee_Shift" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Customers_Returns_Orders" Relationship="Self.fk_CustomerReturnOrder_Employees" FromRole="Employees" ToRole="Customers_Returns_Orders" />
+          <NavigationProperty Name="Orders" Relationship="Self.fk_Orders_Employees" FromRole="Employees" ToRole="Orders" />
+          <NavigationProperty Name="Return_Supplier_Invoices" Relationship="Self.fk_ReturnSupplierInvoices_Employees" FromRole="Employees" ToRole="Return_Supplier_Invoices" />
+          <NavigationProperty Name="Supplier_Invoices" Relationship="Self.fk_SupplierInvoices_Employees" FromRole="Employees" ToRole="Supplier_Invoices" />
+        </EntityType>
+        <EntityType Name="ExpiringMedicine">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MedicineId" Type="Int32" />
+          <Property Name="MedicineName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ExpirationDate" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="low_stock">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MedicineId" Type="Int32" />
+          <Property Name="MedicineName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="Order_ID" />
+          </Key>
+          <Property Name="Order_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Total_Amount" Type="Int32" />
+          <Property Name="Total_price" Type="Double" />
+          <Property Name="Order_Code" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Sell_date" Type="DateTime" Precision="0" />
+          <Property Name="Customer_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Customer_Phone" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
+          <Property Name="Employee_ID" Type="Int32" />
+          <NavigationProperty Name="Customers_Returns_Orders" Relationship="Self.FK_CustomerReturnOrder_Orders" FromRole="Orders" ToRole="Customers_Returns_Orders" />
+          <NavigationProperty Name="Employee" Relationship="Self.fk_Orders_Employees" FromRole="Orders" ToRole="Employees" />
+          <NavigationProperty Name="Products_Orders" Relationship="Self.FK_ProductOrders_Orders" FromRole="Orders" ToRole="Products_Orders" />
+        </EntityType>
+        <EntityType Name="Pharmacy_Useres">
+          <Key>
+            <PropertyRef Name="use_ID" />
+          </Key>
+          <Property Name="use_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Employee_Email" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="passwords" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
+          <Property Name="Role" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="Product_ID" />
+          </Key>
+          <Property Name="Product_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Product_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Category_ID" Type="Int32" />
+          <Property Name="Total_Quantity" Type="Int32" />
+          <Property Name="Unit" Type="Int32" />
+          <Property Name="Price_Per_Unit" Type="Double" />
+          <Property Name="Price" Type="Double" />
+          <NavigationProperty Name="Category" Relationship="Self.fk_product_category" FromRole="Products" ToRole="Categories" />
+          <NavigationProperty Name="Customers_Returns_Orders" Relationship="Self.FK_CustomerReturnOrder_Products" FromRole="Products" ToRole="Customers_Returns_Orders" />
+          <NavigationProperty Name="Supplier_Invoices_Products" Relationship="Self.FK_PK_SupplierInvoicesProduct_Products" FromRole="Products" ToRole="Supplier_Invoices_Products" />
+          <NavigationProperty Name="Products_Orders" Relationship="Self.FK_ProductOrders_Products" FromRole="Products" ToRole="Products_Orders" />
+          <NavigationProperty Name="Quantity_Details" Relationship="Self.fk_Quantity_Details_product" FromRole="Products" ToRole="Quantity_Details" />
+          <NavigationProperty Name="Return_Supplier_Invoices_Products" Relationship="Self.FK_ReturnSupplierInvoices_Products" FromRole="Products" ToRole="Return_Supplier_Invoices_Products" />
+        </EntityType>
+        <EntityType Name="Products_Orders">
+          <Key>
+            <PropertyRef Name="Product_Order_ID" />
+          </Key>
+          <Property Name="Product_Order_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Product_ID" Type="Int32" />
+          <Property Name="Order_ID" Type="Int32" />
+          <Property Name="Quantity" Type="Int32" />
+          <NavigationProperty Name="Order" Relationship="Self.FK_ProductOrders_Orders" FromRole="Products_Orders" ToRole="Orders" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_ProductOrders_Products" FromRole="Products_Orders" ToRole="Products" />
+        </EntityType>
+        <EntityType Name="Quantity_Details">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Product_ID" Type="Int32" />
+          <Property Name="Expiration_Date" Type="DateTime" Precision="0" />
+          <Property Name="Quantity" Type="Int32" />
+          <NavigationProperty Name="Product" Relationship="Self.fk_Quantity_Details_product" FromRole="Quantity_Details" ToRole="Products" />
+        </EntityType>
+        <EntityType Name="Return_Supplier_Invoices">
+          <Key>
+            <PropertyRef Name="Return_Supplier_ID" />
+          </Key>
+          <Property Name="Return_Supplier_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Return_Supplier_Date" Type="DateTime" Precision="0" />
+          <Property Name="Return_Price" Type="Double" />
+          <Property Name="Return_Total_Amount" Type="Int32" />
+          <Property Name="Employee_ID" Type="Int32" />
+          <Property Name="Supplier_Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="RS_Code" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Employee" Relationship="Self.fk_ReturnSupplierInvoices_Employees" FromRole="Return_Supplier_Invoices" ToRole="Employees" />
+          <NavigationProperty Name="Return_Supplier_Invoices_Products" Relationship="Self.FK_ReturnSupplierInvoices_Return_Supplier" FromRole="Return_Supplier_Invoices" ToRole="Return_Supplier_Invoices_Products" />
+        </EntityType>
+        <EntityType Name="Return_Supplier_Invoices_Products">
+          <Key>
+            <PropertyRef Name="RSP_ID" />
+          </Key>
+          <Property Name="RSP_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Return_Supplier_ID" Type="Int32" />
+          <Property Name="Supplier_Invoices_ID" Type="Int32" />
+          <Property Name="Supplier_ID" Type="Int32" />
+          <Property Name="Product_ID" Type="Int32" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_ReturnSupplierInvoices_Products" FromRole="Return_Supplier_Invoices_Products" ToRole="Products" />
+          <NavigationProperty Name="Return_Supplier_Invoices" Relationship="Self.FK_ReturnSupplierInvoices_Return_Supplier" FromRole="Return_Supplier_Invoices_Products" ToRole="Return_Supplier_Invoices" />
+          <NavigationProperty Name="Supplier" Relationship="Self.FK_ReturnSupplierInvoices_Supplier" FromRole="Return_Supplier_Invoices_Products" ToRole="Suppliers" />
+          <NavigationProperty Name="Supplier_Invoices" Relationship="Self.FK_ReturnSupplierInvoices_SupplierInvoices" FromRole="Return_Supplier_Invoices_Products" ToRole="Supplier_Invoices" />
+        </EntityType>
+        <EntityType Name="Supplier_Invoices">
+          <Key>
+            <PropertyRef Name="Supplier_Invoices_ID" />
+          </Key>
+          <Property Name="Supplier_Invoices_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="S_Invoice_TotalAmount" Type="Double" />
+          <Property Name="S_Invoice_Date" Type="DateTime" Precision="0" />
+          <Property Name="S_Invoice_code" Type="Int32" />
+          <Property Name="Suppliers_ID" Type="Int32" />
+          <Property Name="Employee_ID" Type="Int32" />
+          <NavigationProperty Name="Employee" Relationship="Self.fk_SupplierInvoices_Employees" FromRole="Supplier_Invoices" ToRole="Employees" />
+          <NavigationProperty Name="Return_Supplier_Invoices_Products" Relationship="Self.FK_ReturnSupplierInvoices_SupplierInvoices" FromRole="Supplier_Invoices" ToRole="Return_Supplier_Invoices_Products" />
+          <NavigationProperty Name="Supplier_Invoices_Products" Relationship="Self.FK_PK_SupplierInvoicesProduct_SupplierInvoices" FromRole="Supplier_Invoices" ToRole="Supplier_Invoices_Products" />
+          <NavigationProperty Name="Supplier" Relationship="Self.fk_SupplierInvoices_Suppliers" FromRole="Supplier_Invoices" ToRole="Suppliers" />
+        </EntityType>
+        <EntityType Name="Supplier_Invoices_Products">
+          <Key>
+            <PropertyRef Name="Supplier_ID" />
+            <PropertyRef Name="Product_ID" />
+            <PropertyRef Name="Supplier_Invoices_ID" />
+          </Key>
+          <Property Name="Supplier_ID" Type="Int32" Nullable="false" />
+          <Property Name="Product_ID" Type="Int32" Nullable="false" />
+          <Property Name="Supplier_Invoices_ID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_PK_SupplierInvoicesProduct_Products" FromRole="Supplier_Invoices_Products" ToRole="Products" />
+          <NavigationProperty Name="Supplier_Invoices" Relationship="Self.FK_PK_SupplierInvoicesProduct_SupplierInvoices" FromRole="Supplier_Invoices_Products" ToRole="Supplier_Invoices" />
+          <NavigationProperty Name="Supplier" Relationship="Self.FK_PK_SupplierInvoicesProduct_Suppliers" FromRole="Supplier_Invoices_Products" ToRole="Suppliers" />
+        </EntityType>
+        <EntityType Name="Supplier">
+          <Key>
+            <PropertyRef Name="Supplier_ID" />
+          </Key>
+          <Property Name="Supplier_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Supplier_Name" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
+          <Property Name="Supplier_Phone" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
+          <Property Name="Supplier_Email" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="Supplier_Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Return_Supplier_Invoices_Products" Relationship="Self.FK_ReturnSupplierInvoices_Supplier" FromRole="Suppliers" ToRole="Return_Supplier_Invoices_Products" />
+          <NavigationProperty Name="Supplier_Invoices" Relationship="Self.fk_SupplierInvoices_Suppliers" FromRole="Suppliers" ToRole="Supplier_Invoices" />
+          <NavigationProperty Name="Supplier_Invoices_Products" Relationship="Self.FK_PK_SupplierInvoicesProduct_Suppliers" FromRole="Suppliers" ToRole="Supplier_Invoices_Products" />
+        </EntityType>
+        <Association Name="fk_product_category">
+          <End Role="Categories" Type="Self.Category" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Products" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categories">
+              <PropertyRef Name="CategoryID" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="Category_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CustomerReturnOrder_CustomerReturn">
+          <End Role="Customers_Returns" Type="Self.Customers_Returns" Multiplicity="0..1" />
+          <End Role="Customers_Returns_Orders" Type="Self.Customers_Returns_Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers_Returns">
+              <PropertyRef Name="Cust_Return_ID" />
+            </Principal>
+            <Dependent Role="Customers_Returns_Orders">
+              <PropertyRef Name="Cust_Return_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_CustomerReturnOrder_Employees">
+          <End Role="Employees" Type="Self.Employee" Multiplicity="0..1" />
+          <End Role="Customers_Returns_Orders" Type="Self.Customers_Returns_Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="Employee_ID" />
+            </Principal>
+            <Dependent Role="Customers_Returns_Orders">
+              <PropertyRef Name="Employee_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CustomerReturnOrder_Orders">
+          <End Role="Orders" Type="Self.Order" Multiplicity="0..1" />
+          <End Role="Customers_Returns_Orders" Type="Self.Customers_Returns_Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="Order_ID" />
+            </Principal>
+            <Dependent Role="Customers_Returns_Orders">
+              <PropertyRef Name="Order_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CustomerReturnOrder_Products">
+          <End Role="Products" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="Customers_Returns_Orders" Type="Self.Customers_Returns_Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="Product_ID" />
+            </Principal>
+            <Dependent Role="Customers_Returns_Orders">
+              <PropertyRef Name="Product_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Orders_Employees">
+          <End Role="Employees" Type="Self.Employee" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Orders" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="Employee_ID" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="Employee_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_ReturnSupplierInvoices_Employees">
+          <End Role="Employees" Type="Self.Employee" Multiplicity="0..1" />
+          <End Role="Return_Supplier_Invoices" Type="Self.Return_Supplier_Invoices" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="Employee_ID" />
+            </Principal>
+            <Dependent Role="Return_Supplier_Invoices">
+              <PropertyRef Name="Employee_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_SupplierInvoices_Employees">
+          <End Role="Employees" Type="Self.Employee" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Supplier_Invoices" Type="Self.Supplier_Invoices" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="Employee_ID" />
+            </Principal>
+            <Dependent Role="Supplier_Invoices">
+              <PropertyRef Name="Employee_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductOrders_Orders">
+          <End Role="Orders" Type="Self.Order" Multiplicity="0..1" />
+          <End Role="Products_Orders" Type="Self.Products_Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="Order_ID" />
+            </Principal>
+            <Dependent Role="Products_Orders">
+              <PropertyRef Name="Order_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PK_SupplierInvoicesProduct_Products">
+          <End Role="Products" Type="Self.Product" Multiplicity="1" />
+          <End Role="Supplier_Invoices_Products" Type="Self.Supplier_Invoices_Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="Product_ID" />
+            </Principal>
+            <Dependent Role="Supplier_Invoices_Products">
+              <PropertyRef Name="Product_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductOrders_Products">
+          <End Role="Products" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="Products_Orders" Type="Self.Products_Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="Product_ID" />
+            </Principal>
+            <Dependent Role="Products_Orders">
+              <PropertyRef Name="Product_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Quantity_Details_product">
+          <End Role="Products" Type="Self.Product" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Quantity_Details" Type="Self.Quantity_Details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="Product_ID" />
+            </Principal>
+            <Dependent Role="Quantity_Details">
+              <PropertyRef Name="Product_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReturnSupplierInvoices_Products">
+          <End Role="Products" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="Return_Supplier_Invoices_Products" Type="Self.Return_Supplier_Invoices_Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="Product_ID" />
+            </Principal>
+            <Dependent Role="Return_Supplier_Invoices_Products">
+              <PropertyRef Name="Product_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReturnSupplierInvoices_Return_Supplier">
+          <End Role="Return_Supplier_Invoices" Type="Self.Return_Supplier_Invoices" Multiplicity="0..1" />
+          <End Role="Return_Supplier_Invoices_Products" Type="Self.Return_Supplier_Invoices_Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Return_Supplier_Invoices">
+              <PropertyRef Name="Return_Supplier_ID" />
+            </Principal>
+            <Dependent Role="Return_Supplier_Invoices_Products">
+              <PropertyRef Name="Return_Supplier_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReturnSupplierInvoices_Supplier">
+          <End Role="Suppliers" Type="Self.Supplier" Multiplicity="0..1" />
+          <End Role="Return_Supplier_Invoices_Products" Type="Self.Return_Supplier_Invoices_Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Suppliers">
+              <PropertyRef Name="Supplier_ID" />
+            </Principal>
+            <Dependent Role="Return_Supplier_Invoices_Products">
+              <PropertyRef Name="Supplier_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReturnSupplierInvoices_SupplierInvoices">
+          <End Role="Supplier_Invoices" Type="Self.Supplier_Invoices" Multiplicity="0..1" />
+          <End Role="Return_Supplier_Invoices_Products" Type="Self.Return_Supplier_Invoices_Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Supplier_Invoices">
+              <PropertyRef Name="Supplier_Invoices_ID" />
+            </Principal>
+            <Dependent Role="Return_Supplier_Invoices_Products">
+              <PropertyRef Name="Supplier_Invoices_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PK_SupplierInvoicesProduct_SupplierInvoices">
+          <End Role="Supplier_Invoices" Type="Self.Supplier_Invoices" Multiplicity="1" />
+          <End Role="Supplier_Invoices_Products" Type="Self.Supplier_Invoices_Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Supplier_Invoices">
+              <PropertyRef Name="Supplier_Invoices_ID" />
+            </Principal>
+            <Dependent Role="Supplier_Invoices_Products">
+              <PropertyRef Name="Supplier_Invoices_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_SupplierInvoices_Suppliers">
+          <End Role="Suppliers" Type="Self.Supplier" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Supplier_Invoices" Type="Self.Supplier_Invoices" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Suppliers">
+              <PropertyRef Name="Supplier_ID" />
+            </Principal>
+            <Dependent Role="Supplier_Invoices">
+              <PropertyRef Name="Suppliers_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PK_SupplierInvoicesProduct_Suppliers">
+          <End Role="Suppliers" Type="Self.Supplier" Multiplicity="1" />
+          <End Role="Supplier_Invoices_Products" Type="Self.Supplier_Invoices_Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Suppliers">
+              <PropertyRef Name="Supplier_ID" />
+            </Principal>
+            <Dependent Role="Supplier_Invoices_Products">
+              <PropertyRef Name="Supplier_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Pharmacy2Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Categories" EntityType="Self.Category" />
+          <EntitySet Name="Customers_Returns" EntityType="Self.Customers_Returns" />
+          <EntitySet Name="Customers_Returns_Orders" EntityType="Self.Customers_Returns_Orders" />
+          <EntitySet Name="Employees" EntityType="Self.Employee" />
+          <EntitySet Name="ExpiringMedicines" EntityType="Self.ExpiringMedicine" />
+          <EntitySet Name="low_stock" EntityType="Self.low_stock" />
+          <EntitySet Name="Orders" EntityType="Self.Order" />
+          <EntitySet Name="Pharmacy_Useres" EntityType="Self.Pharmacy_Useres" />
+          <EntitySet Name="Products" EntityType="Self.Product" />
+          <EntitySet Name="Products_Orders" EntityType="Self.Products_Orders" />
+          <EntitySet Name="Quantity_Details" EntityType="Self.Quantity_Details" />
+          <EntitySet Name="Return_Supplier_Invoices" EntityType="Self.Return_Supplier_Invoices" />
+          <EntitySet Name="Return_Supplier_Invoices_Products" EntityType="Self.Return_Supplier_Invoices_Products" />
+          <EntitySet Name="Supplier_Invoices" EntityType="Self.Supplier_Invoices" />
+          <EntitySet Name="Supplier_Invoices_Products" EntityType="Self.Supplier_Invoices_Products" />
+          <EntitySet Name="Suppliers" EntityType="Self.Supplier" />
+          <AssociationSet Name="fk_product_category" Association="Self.fk_product_category">
+            <End Role="Categories" EntitySet="Categories" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CustomerReturnOrder_CustomerReturn" Association="Self.FK_CustomerReturnOrder_CustomerReturn">
+            <End Role="Customers_Returns" EntitySet="Customers_Returns" />
+            <End Role="Customers_Returns_Orders" EntitySet="Customers_Returns_Orders" />
+          </AssociationSet>
+          <AssociationSet Name="fk_CustomerReturnOrder_Employees" Association="Self.fk_CustomerReturnOrder_Employees">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="Customers_Returns_Orders" EntitySet="Customers_Returns_Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CustomerReturnOrder_Orders" Association="Self.FK_CustomerReturnOrder_Orders">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="Customers_Returns_Orders" EntitySet="Customers_Returns_Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CustomerReturnOrder_Products" Association="Self.FK_CustomerReturnOrder_Products">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Customers_Returns_Orders" EntitySet="Customers_Returns_Orders" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Orders_Employees" Association="Self.fk_Orders_Employees">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="fk_ReturnSupplierInvoices_Employees" Association="Self.fk_ReturnSupplierInvoices_Employees">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="Return_Supplier_Invoices" EntitySet="Return_Supplier_Invoices" />
+          </AssociationSet>
+          <AssociationSet Name="fk_SupplierInvoices_Employees" Association="Self.fk_SupplierInvoices_Employees">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="Supplier_Invoices" EntitySet="Supplier_Invoices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductOrders_Orders" Association="Self.FK_ProductOrders_Orders">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="Products_Orders" EntitySet="Products_Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PK_SupplierInvoicesProduct_Products" Association="Self.FK_PK_SupplierInvoicesProduct_Products">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Supplier_Invoices_Products" EntitySet="Supplier_Invoices_Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductOrders_Products" Association="Self.FK_ProductOrders_Products">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Products_Orders" EntitySet="Products_Orders" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Quantity_Details_product" Association="Self.fk_Quantity_Details_product">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Quantity_Details" EntitySet="Quantity_Details" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReturnSupplierInvoices_Products" Association="Self.FK_ReturnSupplierInvoices_Products">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Return_Supplier_Invoices_Products" EntitySet="Return_Supplier_Invoices_Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReturnSupplierInvoices_Return_Supplier" Association="Self.FK_ReturnSupplierInvoices_Return_Supplier">
+            <End Role="Return_Supplier_Invoices" EntitySet="Return_Supplier_Invoices" />
+            <End Role="Return_Supplier_Invoices_Products" EntitySet="Return_Supplier_Invoices_Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReturnSupplierInvoices_Supplier" Association="Self.FK_ReturnSupplierInvoices_Supplier">
+            <End Role="Suppliers" EntitySet="Suppliers" />
+            <End Role="Return_Supplier_Invoices_Products" EntitySet="Return_Supplier_Invoices_Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReturnSupplierInvoices_SupplierInvoices" Association="Self.FK_ReturnSupplierInvoices_SupplierInvoices">
+            <End Role="Supplier_Invoices" EntitySet="Supplier_Invoices" />
+            <End Role="Return_Supplier_Invoices_Products" EntitySet="Return_Supplier_Invoices_Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PK_SupplierInvoicesProduct_SupplierInvoices" Association="Self.FK_PK_SupplierInvoicesProduct_SupplierInvoices">
+            <End Role="Supplier_Invoices" EntitySet="Supplier_Invoices" />
+            <End Role="Supplier_Invoices_Products" EntitySet="Supplier_Invoices_Products" />
+          </AssociationSet>
+          <AssociationSet Name="fk_SupplierInvoices_Suppliers" Association="Self.fk_SupplierInvoices_Suppliers">
+            <End Role="Suppliers" EntitySet="Suppliers" />
+            <End Role="Supplier_Invoices" EntitySet="Supplier_Invoices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PK_SupplierInvoicesProduct_Suppliers" Association="Self.FK_PK_SupplierInvoicesProduct_Suppliers">
+            <End Role="Suppliers" EntitySet="Suppliers" />
+            <End Role="Supplier_Invoices_Products" EntitySet="Supplier_Invoices_Products" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Pharmacy2ModelStoreContainer" CdmEntityContainer="Pharmacy2Entities">
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="Pharmacy2Model.Category">
+              <MappingFragment StoreEntitySet="Categories">
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="Category_Name" ColumnName="Category_Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customers_Returns">
+            <EntityTypeMapping TypeName="Pharmacy2Model.Customers_Returns">
+              <MappingFragment StoreEntitySet="Customers_Returns">
+                <ScalarProperty Name="Cust_Return_ID" ColumnName="Cust_Return_ID" />
+                <ScalarProperty Name="Total_Price" ColumnName="Total_Price" />
+                <ScalarProperty Name="Total_amount" ColumnName="Total_amount" />
+                <ScalarProperty Name="return_Date" ColumnName="return_Date" />
+                <ScalarProperty Name="c_Return_Code" ColumnName="c_Return_Code" />
+                <ScalarProperty Name="Customer_Name" ColumnName="Customer_Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customers_Returns_Orders">
+            <EntityTypeMapping TypeName="Pharmacy2Model.Customers_Returns_Orders">
+              <MappingFragment StoreEntitySet="Customers_Returns_Orders">
+                <ScalarProperty Name="CRO_ID" ColumnName="CRO_ID" />
+                <ScalarProperty Name="Order_ID" ColumnName="Order_ID" />
+                <ScalarProperty Name="Cust_Return_ID" ColumnName="Cust_Return_ID" />
+                <ScalarProperty Name="Employee_Id" ColumnName="Employee_Id" />
+                <ScalarProperty Name="Product_ID" ColumnName="Product_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employees">
+            <EntityTypeMapping TypeName="Pharmacy2Model.Employee">
+              <MappingFragment StoreEntitySet="Employees">
+                <ScalarProperty Name="Employee_ID" ColumnName="Employee_ID" />
+                <ScalarProperty Name="Employee_Name" ColumnName="Employee_Name" />
+                <ScalarProperty Name="National_ID" ColumnName="National_ID" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Employee_Address" ColumnName="Employee_Address" />
+                <ScalarProperty Name="Employee_Phone" ColumnName="Employee_Phone" />
+                <ScalarProperty Name="Employee_Email" ColumnName="Employee_Email" />
+                <ScalarProperty Name="Salary" ColumnName="Salary" />
+                <ScalarProperty Name="Position" ColumnName="Position" />
+                <ScalarProperty Name="Hire_Date" ColumnName="Hire_Date" />
+                <ScalarProperty Name="Employee_Shift" ColumnName="Employee_Shift" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ExpiringMedicines">
+            <EntityTypeMapping TypeName="Pharmacy2Model.ExpiringMedicine">
+              <MappingFragment StoreEntitySet="ExpiringMedicines">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="MedicineId" ColumnName="MedicineId" />
+                <ScalarProperty Name="MedicineName" ColumnName="MedicineName" />
+                <ScalarProperty Name="ExpirationDate" ColumnName="ExpirationDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="low_stock">
+            <EntityTypeMapping TypeName="Pharmacy2Model.low_stock">
+              <MappingFragment StoreEntitySet="low_stock">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="MedicineId" ColumnName="MedicineId" />
+                <ScalarProperty Name="MedicineName" ColumnName="MedicineName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="Pharmacy2Model.Order">
+              <MappingFragment StoreEntitySet="Orders">
+                <ScalarProperty Name="Order_ID" ColumnName="Order_ID" />
+                <ScalarProperty Name="Total_Amount" ColumnName="Total_Amount" />
+                <ScalarProperty Name="Total_price" ColumnName="Total_price" />
+                <ScalarProperty Name="Order_Code" ColumnName="Order_Code" />
+                <ScalarProperty Name="Sell_date" ColumnName="Sell_date" />
+                <ScalarProperty Name="Customer_Name" ColumnName="Customer_Name" />
+                <ScalarProperty Name="Customer_Phone" ColumnName="Customer_Phone" />
+                <ScalarProperty Name="Employee_ID" ColumnName="Employee_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pharmacy_Useres">
+            <EntityTypeMapping TypeName="Pharmacy2Model.Pharmacy_Useres">
+              <MappingFragment StoreEntitySet="Pharmacy_Useres">
+                <ScalarProperty Name="use_ID" ColumnName="use_ID" />
+                <ScalarProperty Name="Employee_Email" ColumnName="Employee_Email" />
+                <ScalarProperty Name="passwords" ColumnName="passwords" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="Pharmacy2Model.Product">
+              <MappingFragment StoreEntitySet="Products">
+                <ScalarProperty Name="Product_ID" ColumnName="Product_ID" />
+                <ScalarProperty Name="Product_Name" ColumnName="Product_Name" />
+                <ScalarProperty Name="Category_ID" ColumnName="Category_ID" />
+                <ScalarProperty Name="Total_Quantity" ColumnName="Total_Quantity" />
+                <ScalarProperty Name="Unit" ColumnName="Unit" />
+                <ScalarProperty Name="Price_Per_Unit" ColumnName="Price_Per_Unit" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Products_Orders">
+            <EntityTypeMapping TypeName="Pharmacy2Model.Products_Orders">
+              <MappingFragment StoreEntitySet="Products_Orders">
+                <ScalarProperty Name="Product_Order_ID" ColumnName="Product_Order_ID" />
+                <ScalarProperty Name="Product_ID" ColumnName="Product_ID" />
+                <ScalarProperty Name="Order_ID" ColumnName="Order_ID" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Quantity_Details">
+            <EntityTypeMapping TypeName="Pharmacy2Model.Quantity_Details">
+              <MappingFragment StoreEntitySet="Quantity_Details">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Product_ID" ColumnName="Product_ID" />
+                <ScalarProperty Name="Expiration_Date" ColumnName="Expiration_Date" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Return_Supplier_Invoices">
+            <EntityTypeMapping TypeName="Pharmacy2Model.Return_Supplier_Invoices">
+              <MappingFragment StoreEntitySet="Return_Supplier_Invoices">
+                <ScalarProperty Name="Return_Supplier_ID" ColumnName="Return_Supplier_ID" />
+                <ScalarProperty Name="Return_Supplier_Date" ColumnName="Return_Supplier_Date" />
+                <ScalarProperty Name="Return_Price" ColumnName="Return_Price" />
+                <ScalarProperty Name="Return_Total_Amount" ColumnName="Return_Total_Amount" />
+                <ScalarProperty Name="Employee_ID" ColumnName="Employee_ID" />
+                <ScalarProperty Name="Supplier_Note" ColumnName="Supplier_Note" />
+                <ScalarProperty Name="RS_Code" ColumnName="RS_Code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Return_Supplier_Invoices_Products">
+            <EntityTypeMapping TypeName="Pharmacy2Model.Return_Supplier_Invoices_Products">
+              <MappingFragment StoreEntitySet="Return_Supplier_Invoices_Products">
+                <ScalarProperty Name="RSP_ID" ColumnName="RSP_ID" />
+                <ScalarProperty Name="Return_Supplier_ID" ColumnName="Return_Supplier_ID" />
+                <ScalarProperty Name="Supplier_Invoices_ID" ColumnName="Supplier_Invoices_ID" />
+                <ScalarProperty Name="Supplier_ID" ColumnName="Supplier_ID" />
+                <ScalarProperty Name="Product_ID" ColumnName="Product_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Supplier_Invoices">
+            <EntityTypeMapping TypeName="Pharmacy2Model.Supplier_Invoices">
+              <MappingFragment StoreEntitySet="Supplier_Invoices">
+                <ScalarProperty Name="Supplier_Invoices_ID" ColumnName="Supplier_Invoices_ID" />
+                <ScalarProperty Name="S_Invoice_TotalAmount" ColumnName="S_Invoice_TotalAmount" />
+                <ScalarProperty Name="S_Invoice_Date" ColumnName="S_Invoice_Date" />
+                <ScalarProperty Name="S_Invoice_code" ColumnName="S_Invoice_code" />
+                <ScalarProperty Name="Suppliers_ID" ColumnName="Suppliers_ID" />
+                <ScalarProperty Name="Employee_ID" ColumnName="Employee_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Supplier_Invoices_Products">
+            <EntityTypeMapping TypeName="Pharmacy2Model.Supplier_Invoices_Products">
+              <MappingFragment StoreEntitySet="Supplier_Invoices_Products">
+                <ScalarProperty Name="Supplier_ID" ColumnName="Supplier_ID" />
+                <ScalarProperty Name="Product_ID" ColumnName="Product_ID" />
+                <ScalarProperty Name="Supplier_Invoices_ID" ColumnName="Supplier_Invoices_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Suppliers">
+            <EntityTypeMapping TypeName="Pharmacy2Model.Supplier">
+              <MappingFragment StoreEntitySet="Suppliers">
+                <ScalarProperty Name="Supplier_ID" ColumnName="Supplier_ID" />
+                <ScalarProperty Name="Supplier_Name" ColumnName="Supplier_Name" />
+                <ScalarProperty Name="Supplier_Phone" ColumnName="Supplier_Phone" />
+                <ScalarProperty Name="Supplier_Email" ColumnName="Supplier_Email" />
+                <ScalarProperty Name="Supplier_Address" ColumnName="Supplier_Address" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
