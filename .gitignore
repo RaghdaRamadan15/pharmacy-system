@@ -1,0 +1,6 @@
+*.resx
+packages/
+Properties/
+obj/
+bin/Debug
+
