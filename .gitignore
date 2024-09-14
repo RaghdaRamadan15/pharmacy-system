@@ -2,5 +2,6 @@
 packages/
 Properties/
 obj/
-bin/Debug
+bin/
+
 
